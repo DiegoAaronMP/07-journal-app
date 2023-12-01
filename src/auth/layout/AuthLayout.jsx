@@ -14,8 +14,9 @@ export const AuthLayout = ({ children, title = '' }) => {
         >
 
             {/* Ventana central */}
-            <Grid item
-                className="box-shadow"
+            <Grid
+                className=" box-shadow animate__animated animate__fadeIn animate__faster" 
+                item
                 xs={3}
                 sx={{
                     // Definir que en pantallas medianas el ancho sea de 450px 

@@ -10,8 +10,14 @@ import ListItemButton from "@mui/material/ListItemButton"
 import Grid from "@mui/material/Grid"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
+import { useCheckAuth } from "../../hooks/useCheckAuth"
+import { useSelector } from "react-redux"
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
+
+    const {displayName} = useSelector(state => state.auth);
+    
+
     return (
         <Box
             component='nav'
@@ -28,7 +34,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
 
                 <Toolbar>
                     <Typography variant='h6' noWrap component='div'>
-                        Diego Aarón
+                        {displayName}
                     </Typography>
                 </Toolbar>
                 <Divider />
