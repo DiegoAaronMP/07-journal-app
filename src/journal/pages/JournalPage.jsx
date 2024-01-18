@@ -4,28 +4,45 @@ import { NothingSelectedView } from "../views/NothingSelectedView"
 import { NoteView } from "../views/NoteView"
 import { IconButton } from "@mui/material"
 import { AddOutlined } from "@mui/icons-material"
+import { useDispatch, useSelector } from "react-redux"
+import { startNewNote } from "../../store/journal/thunks"
 
 export const JournalPage = () => {
+
+  const dispatch = useDispatch();
+
+  const { isSaving, active } = useSelector(state => state.journal);
+
+
+  const onClickNewNote = () => {
+    dispatch(startNewNote());
+  }
   return (
     <JournalLayout>
-      {/* <Typography>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias saepe rem esse deleniti fuga quis perferendis, unde officia! Sunt aliquam quos cum dolorum autem, totam ipsum officia hic nostrum vel?</Typography> */}
+      
 
-      <NothingSelectedView />
-      {/* <NoteView /> */}
+      {
+        // !! convierte el objeto en booleano
+        (!!active)
+          ? <NoteView /> // Si esta activa se muestra esto
+          : <NothingSelectedView /> // caso contrario
+      }
 
 
       <IconButton
+        onClick={onClickNewNote}
         size="large"
+        disabled={isSaving}
         sx={{
           color: 'white',
           backgroundColor: 'error.main',
-          ':hover': {backgroundColor: 'error.main', opacity: 0.9},
+          ':hover': { backgroundColor: 'error.main', opacity: 0.9 },
           position: 'fixed',
           right: 50,
           bottom: 50
         }}
       >
-        <AddOutlined sx={{fontSize: 30}}/>
+        <AddOutlined sx={{ fontSize: 30 }} />
       </IconButton>
     </JournalLayout>
   )

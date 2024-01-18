@@ -14,6 +14,10 @@ import { useForm } from '../../hooks/useForm'
 import { startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth/thunks'
 import { Alert } from '@mui/material'
 
+const formData = {
+  email: '',
+  password: ''
+}
 
 export const LoginPage = () => {
 
@@ -22,10 +26,7 @@ export const LoginPage = () => {
 
   const dispatch = useDispatch();
 
-  const { email, password, onInputChange } = useForm({
-    email: '',
-    password: ''
-  });
+  const { email, password, onInputChange } = useForm(formData);
 
   const isAuthenticating = useMemo(() => status === 'checking', [status]);
 

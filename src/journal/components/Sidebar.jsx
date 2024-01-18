@@ -12,11 +12,13 @@ import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
 import { useCheckAuth } from "../../hooks/useCheckAuth"
 import { useSelector } from "react-redux"
+import { SideBarItem } from "./SideBarItem"
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
 
-    const {displayName} = useSelector(state => state.auth);
-    
+    const { displayName } = useSelector(state => state.auth);
+    // Obtener las notes del state
+    const {notes} = useSelector(state => state.journal);
 
     return (
         <Box
@@ -41,18 +43,8 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
 
                 <List>
                     {
-                        ['Enero', 'Febrero', 'Marzo', 'Abril'].map(text =>
-                            <ListItem key={text} disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <TurnedInNot />
-                                    </ListItemIcon>
-                                    <Grid container>
-                                        <ListItemText primary={text} />
-                                        <ListItemText secondary={'Texto de relleno para los LI'} />
-                                    </Grid>
-                                </ListItemButton>
-                            </ListItem>
+                        notes.map(note =>
+                            <SideBarItem key={note.id} {...note}/>
                         )
                     }
                 </List>

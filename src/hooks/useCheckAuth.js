@@ -3,6 +3,7 @@ import { FirebaseAuth } from "../firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { login, logout } from "../store/auth/authSlice";
+import { startLoadingNotes } from "../store/journal/thunks";
 
 export const useCheckAuth = () => {
     // Verificamos si ya esta verificado, vamos a mostrar el circulo de carga
@@ -23,6 +24,7 @@ export const useCheckAuth = () => {
             // En caso que si haya un usuario
             const { uid, email, displayName, photoURL } = user;
             dispatch(login({ uid, email, displayName, photoURL }));
+            dispatch(startLoadingNotes());
         });
     }, []);
 
