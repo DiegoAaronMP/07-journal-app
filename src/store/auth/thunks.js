@@ -52,7 +52,7 @@ export const startLoginWithEmailPassword = ({email, password}) => {
         }
 
         // si sale bien, loguear
-        dispatch(login({uid, displayName, email, photoURL}));
+        dispatch(login({uid, displayName, email, photoURL, ok}));
     }
 }
 
